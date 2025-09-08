@@ -3,7 +3,11 @@ import { Input } from "./ui/input";
 import { Search, MessageCircle } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  onNavigateToDashboard?: () => void;
+}
+
+export function HeroSection({ onNavigateToDashboard }: HeroSectionProps) {
   return (
     <div className="relative min-h-[600px] flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -90,7 +94,10 @@ export function HeroSection() {
               </div>
             </div>
             
-            <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
+            <Button 
+              onClick={onNavigateToDashboard}
+              className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+            >
               View Full Dashboard
             </Button>
           </div>
