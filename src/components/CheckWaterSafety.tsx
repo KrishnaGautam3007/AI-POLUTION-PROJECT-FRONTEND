@@ -57,12 +57,16 @@ interface CheckWaterSafetyProps {
   onNavigateToHome?: () => void;
   onNavigateToDashboard?: () => void;
   onNavigateToRiskAlerts?: () => void;
+  onNavigateToReports?: () => void;
+  onNavigateToContributeData?: () => void;
 }
 
 export function CheckWaterSafety({ 
   onNavigateToHome, 
   onNavigateToDashboard, 
-  onNavigateToRiskAlerts 
+  onNavigateToRiskAlerts, 
+  onNavigateToReports,
+  onNavigateToContributeData
 }: CheckWaterSafetyProps) {
   const [searchLocation, setSearchLocation] = useState("");
   const [showResults, setShowResults] = useState(false);
@@ -142,42 +146,55 @@ export function CheckWaterSafety({
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-cyan-50">
       {/* Header Navigation */}
-      <div className="bg-white/80 backdrop-blur-lg border-b border-blue-100 sticky top-0 z-50">
+      <nav className="bg-white/95 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
-                <Droplets className="h-4 w-4 text-white" />
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-2 flex-1">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-green-500 rounded-lg flex items-center justify-center">
+                <span className="text-white text-sm">H</span>
               </div>
-              <span className="text-xl text-slate-800">Check Water Safety</span>
+              <span className="text-xl text-slate-800">HMPI System</span>
             </div>
-            
-            <nav className="flex space-x-8">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={onNavigateToHome}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Home
               </button>
               <button 
                 onClick={onNavigateToDashboard}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Dashboard
               </button>
               <button 
                 onClick={onNavigateToRiskAlerts}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Risk Alerts
               </button>
-              <a href="#" className="text-blue-600 border-b-2 border-blue-600 pb-1">Check Water Safety</a>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">Reports</a>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">Contribute Data</a>
-            </nav>
+              <span className="text-blue-600 border-b-2 border-blue-600 pb-1">Check Water Safety</span>
+              <button 
+                onClick={onNavigateToReports}
+                className="text-slate-700 hover:text-blue-600 transition-colors"
+              >
+                Reports
+              </button>
+              <button 
+                onClick={onNavigateToContributeData}
+                className="text-slate-700 hover:text-blue-600 transition-colors"
+              >
+                Contribute Data
+              </button>
+              <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors">About Us</a>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}

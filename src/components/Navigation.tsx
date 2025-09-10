@@ -4,13 +4,31 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface NavigationProps {
+  currentPage: "home" | "dashboard" | "risk-alerts" | "check-water-safety" | "reports" | "contribute-data";
+  onNavigateToHome?: () => void;
   onNavigateToDashboard?: () => void;
   onNavigateToRiskAlerts?: () => void;
   onNavigateToCheckWaterSafety?: () => void;
+  onNavigateToReports?: () => void;
+  onNavigateToContributeData?: () => void;
 }
 
-export function Navigation({ onNavigateToDashboard, onNavigateToRiskAlerts, onNavigateToCheckWaterSafety }: NavigationProps) {
+export function Navigation({ 
+  currentPage, 
+  onNavigateToHome, 
+  onNavigateToDashboard, 
+  onNavigateToRiskAlerts, 
+  onNavigateToCheckWaterSafety, 
+  onNavigateToReports, 
+  onNavigateToContributeData 
+}: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const getNavItemClass = (page: string) => {
+    return currentPage === page 
+      ? "text-blue-600 border-b-2 border-blue-600 pb-1" 
+      : "text-slate-700 hover:text-blue-600 transition-colors";
+  };
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
@@ -26,28 +44,43 @@ export function Navigation({ onNavigateToDashboard, onNavigateToRiskAlerts, onNa
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-slate-700 hover:text-blue-600 transition-colors">Home</a>
+            <button 
+              onClick={onNavigateToHome}
+              className={getNavItemClass("home")}
+            >
+              Home
+            </button>
             <button 
               onClick={onNavigateToDashboard} 
-              className="text-slate-700 hover:text-blue-600 transition-colors"
+              className={getNavItemClass("dashboard")}
             >
               Dashboard
             </button>
             <button 
               onClick={onNavigateToRiskAlerts} 
-              className="text-slate-700 hover:text-blue-600 transition-colors"
+              className={getNavItemClass("risk-alerts")}
             >
               Risk Alerts
             </button>
-            <a href="#reports" className="text-slate-700 hover:text-blue-600 transition-colors">Reports</a>
-            <a href="#contribute" className="text-slate-700 hover:text-blue-600 transition-colors">Contribute Data</a>
-            <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors">About Us</a>
-            <Button 
+            <button 
               onClick={onNavigateToCheckWaterSafety}
-              className="bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600"
+              className={getNavItemClass("check-water-safety")}
             >
               Check Water Safety
-            </Button>
+            </button>
+            <button 
+              onClick={onNavigateToReports} 
+              className={getNavItemClass("reports")}
+            >
+              Reports
+            </button>
+            <button 
+              onClick={onNavigateToContributeData} 
+              className={getNavItemClass("contribute-data")}
+            >
+              Contribute Data
+            </button>
+            <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors">About Us</a>
           </div>
 
           {/* Mobile menu button */}
@@ -66,28 +99,43 @@ export function Navigation({ onNavigateToDashboard, onNavigateToRiskAlerts, onNa
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-blue-100 py-4">
             <div className="flex flex-col space-y-3">
-              <a href="#home" className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1">Home</a>
+              <button 
+                onClick={onNavigateToHome}
+                className={`${getNavItemClass("home")} px-2 py-1 text-left`}
+              >
+                Home
+              </button>
               <button 
                 onClick={onNavigateToDashboard} 
-                className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1 text-left"
+                className={`${getNavItemClass("dashboard")} px-2 py-1 text-left`}
               >
                 Dashboard
               </button>
               <button 
                 onClick={onNavigateToRiskAlerts} 
-                className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1 text-left"
+                className={`${getNavItemClass("risk-alerts")} px-2 py-1 text-left`}
               >
                 Risk Alerts
               </button>
-              <a href="#reports" className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1">Reports</a>
-              <a href="#contribute" className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1">Contribute Data</a>
-              <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1">About Us</a>
-              <Button 
+              <button 
                 onClick={onNavigateToCheckWaterSafety}
-                className="bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 mt-2"
+                className={`${getNavItemClass("check-water-safety")} px-2 py-1 text-left`}
               >
                 Check Water Safety
-              </Button>
+              </button>
+              <button 
+                onClick={onNavigateToReports} 
+                className={`${getNavItemClass("reports")} px-2 py-1 text-left`}
+              >
+                Reports
+              </button>
+              <button 
+                onClick={onNavigateToContributeData} 
+                className={`${getNavItemClass("contribute-data")} px-2 py-1 text-left`}
+              >
+                Contribute Data
+              </button>
+              <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors px-2 py-1">About Us</a>
             </div>
           </div>
         )}

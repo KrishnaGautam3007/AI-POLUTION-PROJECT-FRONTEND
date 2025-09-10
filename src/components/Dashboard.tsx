@@ -33,9 +33,11 @@ interface DashboardProps {
   onNavigateToHome?: () => void;
   onNavigateToRiskAlerts?: () => void;
   onNavigateToCheckWaterSafety?: () => void;
+  onNavigateToReports?: () => void;
+  onNavigateToContributeData?: () => void;
 }
 
-export function Dashboard({ onNavigateToHome, onNavigateToRiskAlerts, onNavigateToCheckWaterSafety }: DashboardProps) {
+export function Dashboard({ onNavigateToHome, onNavigateToRiskAlerts, onNavigateToCheckWaterSafety, onNavigateToReports, onNavigateToContributeData }: DashboardProps) {
   const overallWaterQuality = 72; // Overall quality score
   const currentPH = 6.8;
   const hmpiScore = 3.2;
@@ -45,42 +47,55 @@ export function Dashboard({ onNavigateToHome, onNavigateToRiskAlerts, onNavigate
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header Navigation */}
-      <div className="bg-white border-b border-blue-100 sticky top-0 z-50">
+      <nav className="bg-white/95 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-2 flex-1">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-green-500 rounded-lg flex items-center justify-center">
                 <span className="text-white text-sm">H</span>
               </div>
-              <span className="text-xl text-slate-800">HMPI Dashboard</span>
+              <span className="text-xl text-slate-800">HMPI System</span>
             </div>
-            
-            <nav className="flex space-x-8">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={onNavigateToHome}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Home
               </button>
-              <a href="#" className="text-blue-600 border-b-2 border-blue-600 pb-1">Dashboard</a>
+              <span className="text-blue-600 border-b-2 border-blue-600 pb-1">Dashboard</span>
               <button 
                 onClick={onNavigateToRiskAlerts}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Risk Alerts
               </button>
               <button 
                 onClick={onNavigateToCheckWaterSafety}
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Check Water Safety
               </button>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">Reports</a>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">Contribute Data</a>
-            </nav>
+              <button 
+                onClick={onNavigateToReports}
+                className="text-slate-700 hover:text-blue-600 transition-colors"
+              >
+                Reports
+              </button>
+              <button 
+                onClick={onNavigateToContributeData}
+                className="text-slate-700 hover:text-blue-600 transition-colors"
+              >
+                Contribute Data
+              </button>
+              <a href="#about" className="text-slate-700 hover:text-blue-600 transition-colors">About Us</a>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Summary Section */}
